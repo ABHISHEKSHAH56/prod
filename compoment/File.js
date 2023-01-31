@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import style from  "./style.module.css";
+import  style from "./style.module.css";
 import Files from "react-files";
 
 export default function FileUpload() {
@@ -14,12 +14,12 @@ export default function FileUpload() {
     
 }
   return (
-    <div class="mb-6 pt-4">
-      <label class="formbold-form-label formbold-form-label-2">
+    <div className= {`${style.mb6} ${style.pt4}`}>
+      <label className={`${style.formboldformlabel} ${style.formboldformlabel2}`}>
         Upload File
       </label>
 
-      <div class="formbold-mb-5 formbold-file-input">
+      <div className={`${style.formboldmb5} ${style.formboldfileinput}`}>
         <Files
           onChange={onFilesChange}
           onError={onFilesError}
@@ -29,11 +29,11 @@ export default function FileUpload() {
           
           clickable
         >
-          <label for="file">
+          <label htmlFor="file">
             <div>
-              <span class="formbold-drop-file"> Drop files here </span>
-              <span class="formbold-or"> Or </span>
-              <span class="formbold-browse"> Browse </span>
+              <span className={style.formbolddropfile}> Drop files here </span>
+              <span className={style.formboldor}> Or </span>
+              <span className={style.formboldbrowse}> Browse </span>
             </div>
           </label>
         </Files>

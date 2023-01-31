@@ -8,8 +8,8 @@ export default function Keyword({emailKeyword ,setemailKeyword}) {
   const [key, setkey] = useState("")
   return (
     <>
-    <div class={style.formboldmb5}>
-    <label class={ style.formboldformlabel }>
+    <div className={style.formboldmb5}>
+    <label className={`${style.formboldformlabel} ${style.formboldformlabel2}`}>
     Enter the key word to generate the email :
     </label>
        
@@ -34,7 +34,7 @@ export default function Keyword({emailKeyword ,setemailKeyword}) {
           name="key"
           id="#email"
           placeholder="Enter your key to generate the email"
-          class="formbold-form-input"
+          className={style.formboldforminput}
           value={key}
           onChange={(e)=>setkey(e.currentTarget.value)}
         />
@@ -47,7 +47,7 @@ export default function Keyword({emailKeyword ,setemailKeyword}) {
                   setkey("")
                 }
               }}
-              class="formbold-btn w-full">
+              className={style.formboldbtn}>
               Add Key
             </button>
          </div>
