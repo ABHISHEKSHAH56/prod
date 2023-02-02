@@ -39,9 +39,9 @@ const SendEmail=async()=>{
 
 
       }).catch((err)=>{
-        alert(err.response?.data);      
-        setshowLoader(false)
-        console.log("error",err)
+        setopen(false)
+        alert(err.response?.data);
+
       })
       
     } catch (error) {

@@ -3,20 +3,20 @@ import second, { transporter } from '../../config/index'
 export default async function (req, res) {  
   
   try {
-    const { mailBody,reciever}=req.body
+    const { mailBody,reciever,subject}=req.body
     console.log(mailBody,reciever)
     if(!mailBody) throw new Error("email body is missing ")
-    if(!reciever) throw new Error("Recipient missing")
+    if(!reciever.length) throw new Error("Recipient missing")
     var response=[["email","status"]]
-    //extract subject
-    let sub=mailBody.split("}")
-    if(sub.length!==2) throw new Error("Subject is missing or format not match ")
-    let subleft=sub[0].split("{")
-    let restbody=sub[1]
+    // //extract subject
+    // let sub=mailBody.split("}")
+    // if(sub.length!==2) throw new Error("Subject is missing or format not match ")
+    // let subleft=sub[0].split("{")
+    // let restbody=sub[1]
   
     for(let i=0; i<reciever.length; i++){
       
-      await HandleRequest(reciever[i],response,restbody,subleft[0])
+      await HandleRequest(reciever[i],response,mailBody,subject)
   
     }
       res.status(200).json({
@@ -55,7 +55,7 @@ export default async function (req, res) {
     
    } catch (error) {
     console.log("error",error)
-    throw new Error("file missing")
+    throw new Error(error.message)
     
    }
    
