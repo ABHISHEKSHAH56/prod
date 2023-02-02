@@ -1,43 +1,68 @@
 import React, { useState } from "react";
-import  style from "./style.module.css";
+import style from "./style.module.css";
 import Files from "react-files";
+import CSVReader from "react-csv-reader";
+import { Button } from "@mui/material";
+import DraggableDialog from "./Dialoge";
 
-export default function FileUpload() {
-  const [file, setfile] = useState("")
-  function onFilesError(files, error) {
-    console.log(error);
-    console.log("error code " + error.code + ": " + error.message);
-  }
-  async function onFilesChange(files) {
-    console.log(files, "working");
-    setfile(files[0]?.name)
+export default function FileUploadz() {
+  const [file, setfile] = useState("");
+  const [Data, setData] = useState([]);
+  const [open, setopen] = useState(false)
+  const [response, setresponse] = useState({
     
-}
+  })
+
+  const handleForce = (data, fileInfo) => {
+    setfile(fileInfo);
+    setData(data);
+    console.log("data", Data);
+  };
+ 
+  const handleSubmit=()=>{
+    setresponse({
+      TotalLength:Data?.length
+    })
+    setopen(true)
+
+
+
+  }
+  const papaparseOptions = {
+    header: true,
+    dynamicTyping: true,
+    skipEmptyLines: true,
+    transformHeader: (header) => header.toLowerCase().replace(/\W/g, "_"),
+  };
   return (
-    <div className= {`${style.mb6} ${style.pt4}`}>
-      <label className={`${style.formboldformlabel} ${style.formboldformlabel2}`}>
+    <div className={`${style.mb6} ${style.pt4}`}>
+      <label
+        className={`${style.formboldformlabel} ${style.formboldformlabel2}`}
+      >
         Upload File
       </label>
-
-      <div className={`${style.formboldmb5} ${style.formboldfileinput}`}>
-        <Files
-          onChange={onFilesChange}
-          onError={onFilesError}
-          accepts={["image/*", ".csv", "audio/*"]}
+      <div style={{marginTop:"50px"}}>
+      <CSVReader
         
-          minFileSize={0}
-          
-          clickable
-        >
-          <label htmlFor="file">
-            <div>
-              <span className={style.formbolddropfile}> Drop files here </span>
-              <span className={style.formboldor}> Or </span>
-              <span className={style.formboldbrowse}> Browse </span>
-            </div>
-          </label>
-        </Files>
-        <p>{file}</p>
+        cssClass="react-csv-input"
+       
+        onFileLoaded={handleForce}
+        parserOptions={papaparseOptions}
+      />
+      </div>
+      <DraggableDialog  setOpen={setopen} open={open} response={response}/>
+
+      <div style={{
+        display:"flex",
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:"40px",
+        height:"300px"
+
+      }}>
+      <button onClick={handleSubmit} className={style.formboldbtn}>
+        Send Mail 
+      </button>
       </div>
     </div>
   );

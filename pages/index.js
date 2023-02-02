@@ -1,18 +1,20 @@
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 import React, { useState } from "react";
 import FileUpload from "../compoment/File";
 import Keyword from "../compoment/Keyword";
+import RichText from "../compoment/RichText";
 import style from "./../compoment/style.module.css";
+import CSVReader from "react-csv-reader";
 
 export default function App() {
   const [emailKeyword, setemailKeyword] = useState([]);
   const [Result, setResult] = useState("");
-  const [showLoader, setshowLoader] = useState(false)
+  const [showLoader, setshowLoader] = useState(false);
 
   async function onSubmit(event) {
     event.preventDefault();
-    setshowLoader(true)
-    setResult("")
+    setshowLoader(true);
+    setResult("");
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -24,7 +26,7 @@ export default function App() {
 
       const data = await response.json();
       if (response.status !== 200) {
-        setResult("Not Able to get ")
+        setResult("Not Able to get ");
         throw (
           data.error ||
           new Error(`Request failed with status ${response.status}`)
@@ -32,7 +34,7 @@ export default function App() {
       }
 
       setResult(data.result);
-      setshowLoader(false)
+      setshowLoader(false);
       setemailKeyword([]);
     } catch (error) {
       // Consider implementing your own error handling logic here
@@ -40,6 +42,7 @@ export default function App() {
       alert(error.message);
     }
   }
+ 
   return (
     <>
       <div className={style.formboldmainwrapper}>
@@ -48,7 +51,6 @@ export default function App() {
             emailKeyword={emailKeyword}
             setemailKeyword={setemailKeyword}
           />
-          <FileUpload />
 
           <div
             style={{
@@ -59,24 +61,38 @@ export default function App() {
               marginTop: "30px",
             }}
           >
-            {
-              showLoader? <CircularProgress /> :
-              <button  className={style.formboldbtn} onClick={onSubmit}>
-              Generate Email
-            </button>
-            }
-           
+            {showLoader ? (
+              <CircularProgress />
+            ) : (
+              <button className={style.formboldbtn} onClick={onSubmit}>
+                Generate Email
+              </button>
+            )}
           </div>
           {Result ? (
-              <>
-                <label
-                  className={`${style.formboldformlabel} ${style.formboldformlabel2}`}
-                >
-                  response
-                </label>
-                <p>{Result}</p>
-              </>
-            ) : null}
+            <>
+            
+              <Grid
+                container
+                style={{
+                  marginTop:"100px"
+                }}
+                rowSpacing={1}
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              >
+                <Grid item xs={6}>
+                  <label className={`${style.formboldformlabel} ${style.formboldformlabel2}`}>
+                    Response
+                  </label>
+                  <RichText value={Result} setResult={setResult} />
+                </Grid>
+                <Grid item xs={6}>
+                <FileUpload />
+                  
+                </Grid>
+              </Grid>
+            </>
+          ) : null}
         </div>
       </div>
     </>

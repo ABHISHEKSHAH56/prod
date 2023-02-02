@@ -27,7 +27,7 @@ export default async function (req, res) {
 
   try {
     const response = await openai.createCompletion({
-      model: "text-davinci-001",
+      model: "text-curie-001",
       prompt: `Write an email to using ${keyword} position keyword.`,
       temperature: 0.4,
       max_tokens: 250,
