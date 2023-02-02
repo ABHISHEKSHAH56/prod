@@ -36,7 +36,7 @@ export default function DraggableDialog({open, setOpen,showLoader,response}) {
           <DialogContent>
             {
               showLoader?<CircularProgress />:<DialogContentText>
-             <p>{item?.toString()}</p>
+             <p>{response?.toString()}</p>
             </DialogContentText>
             }
           </DialogContent>
