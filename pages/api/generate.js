@@ -1,4 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
+import { PROMPT } from "../../config";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -26,9 +27,11 @@ export default async function (req, res) {
   }
 
   try {
+    
+    const promtReplace=PROMPT.replace("[key word]",keyword)
     const response = await openai.createCompletion({
-      model: "text-curie-001",
-      prompt: `Write an email to using ${keyword} position keyword.`,
+      model:process.env.GPT_MODEL,
+      prompt: promtReplace,
       temperature: 0.4,
       max_tokens: 250,
       top_p: 1,

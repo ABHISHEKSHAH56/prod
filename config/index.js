@@ -1,6 +1,7 @@
 
 const nodemailer = require('nodemailer');
 
+export const PROMPT=`write an email using [key word]`
 
 //const test=await nodemailer.createTestAccount()
 export const transporter = nodemailer.createTransport({

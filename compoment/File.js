@@ -28,7 +28,7 @@ const SendEmail=async()=>{
     try {
 
       const emailBody={
-        subject:"",
+        subject:"testing",
         mailBody:Result,
         reciever:Data
       }
@@ -39,7 +39,7 @@ const SendEmail=async()=>{
 
 
       }).catch((err)=>{
-        setresponse("some thing went wrong ")
+        alert(err.response?.data);      
         setshowLoader(false)
         console.log("error",err)
       })

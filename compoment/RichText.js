@@ -7,7 +7,7 @@ export default function RichText(props) {
     useEffect(() => {
       const asyncFn = async () => {
         const module = await import("react-rte")      
-        setTextValue(module.createValueFromString(props?.value,'html'))
+        setTextValue(module.createValueFromString(props?.value,'markdown'))
       }
       asyncFn();
     

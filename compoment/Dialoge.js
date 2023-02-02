@@ -6,6 +6,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { CircularProgress } from '@mui/material';
+import { CSVDownload, CSVLink } from 'react-csv';
+import style from "./../compoment/style.module.css"
 
 
 
@@ -19,6 +21,8 @@ export default function DraggableDialog({open, setOpen,showLoader,response}) {
     const handleClose = () => {
       setOpen(false);
     };
+    
+    
   
     return (
       <div>
@@ -36,7 +40,12 @@ export default function DraggableDialog({open, setOpen,showLoader,response}) {
           <DialogContent>
             {
               showLoader?<CircularProgress />:<DialogContentText>
-             <p>{response?.toString()}</p>
+                <CSVDownload data={response} target="_blank" />
+             <CSVLink data={response}>
+              <button  className={style.formboldbtn} style={{backgroundColor:'green'}}>
+                 Download Resonse
+              </button>
+              </CSVLink>;
             </DialogContentText>
             }
           </DialogContent>
