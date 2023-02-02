@@ -10,4 +10,4 @@ export default function Chips({label, handleDelete}) {
       <Chip label={label} onDelete={handleDelete} />
     </Stack>
   );
-}
+  }

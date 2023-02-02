@@ -87,7 +87,7 @@ export default function App() {
                   <RichText value={Result} setResult={setResult} />
                 </Grid>
                 <Grid item xs={6}>
-                <FileUpload />
+                <FileUpload Result={Result} />
                   
                 </Grid>
               </Grid>

@@ -4,10 +4,13 @@ const RichTextEditor = dynamic(() => import("react-rte"), { ssr: false });
 
 export default function RichText(props) {
     const [TextValue, setTextValue] = useState()
-    useEffect(async() => {
-      const module = await import("react-rte")
-      
-      setTextValue(module.createValueFromString(props?.value,'markdown'))
+    useEffect(() => {
+      const asyncFn = async () => {
+        const module = await import("react-rte")      
+        setTextValue(module.createValueFromString(props?.value,'html'))
+      }
+      asyncFn();
+    
       
     
       
@@ -16,10 +19,12 @@ export default function RichText(props) {
     const handleChange=(value)=>{
         console.log("handlechange",value)
         setTextValue(value)
-        props.setResult(TextValue.toString('markdown').toString())
+        props.setResult(TextValue.toString('html').toString())
         console.log("xxxxxxxx",TextValue.toString("markdown") )
     }
-    
+    if (!TextValue) {
+      return null;
+    }
   return (
     <RichTextEditor
         value={TextValue}

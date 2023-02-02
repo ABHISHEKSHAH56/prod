@@ -4,14 +4,52 @@ import Files from "react-files";
 import CSVReader from "react-csv-reader";
 import { Button } from "@mui/material";
 import DraggableDialog from "./Dialoge";
+import axios from "axios";
 
-export default function FileUploadz() {
+export default function FileUploadz({Result}) {
   const [file, setfile] = useState("");
   const [Data, setData] = useState([]);
   const [open, setopen] = useState(false)
-  const [response, setresponse] = useState({
+  const [showLoader, setshowLoader] = useState(false)
+  const [response, setresponse] = useState()
+  console.log("Result",typeof Result)
+  async function handleSubmit(event) {
+
+    event.preventDefault();
+    setopen(true)
+    setshowLoader(true)
+    SendEmail()
+ 
+
     
-  })
+  }
+
+const SendEmail=async()=>{
+    try {
+
+      const emailBody={
+        subject:"",
+        mailBody:Result,
+        reciever:Data
+      }
+      await axios.post("/api/emailsend",emailBody).then((res)=>{
+        console.log(res?.data)
+        setresponse(res.data?.response)
+        setshowLoader(false)
+
+
+      }).catch((err)=>{
+        setresponse("some thing went wrong ")
+        setshowLoader(false)
+        console.log("error",err)
+      })
+      
+    } catch (error) {
+      
+    }
+  }
+ 
+  
 
   const handleForce = (data, fileInfo) => {
     setfile(fileInfo);
@@ -19,15 +57,7 @@ export default function FileUploadz() {
     console.log("data", Data);
   };
  
-  const handleSubmit=()=>{
-    setresponse({
-      TotalLength:Data?.length
-    })
-    setopen(true)
-
-
-
-  }
+ 
   const papaparseOptions = {
     header: true,
     dynamicTyping: true,
@@ -50,7 +80,7 @@ export default function FileUploadz() {
         parserOptions={papaparseOptions}
       />
       </div>
-      <DraggableDialog  setOpen={setopen} open={open} response={response}/>
+      <DraggableDialog  setOpen={setopen} open={open} response={response} showLoader={showLoader}/>
 
       <div style={{
         display:"flex",

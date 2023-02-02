@@ -5,19 +5,17 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { CircularProgress } from '@mui/material';
 
 
 
 
 
 
-export default function DraggableDialog({open, setOpen}) {
+export default function DraggableDialog({open, setOpen,showLoader,response}) {
     
   
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
+   
     const handleClose = () => {
       setOpen(false);
     };
@@ -33,12 +31,14 @@ export default function DraggableDialog({open, setOpen}) {
           fullWidth
         >
           <DialogTitle  id="draggable-dialog-title">
-            Processing
+           Processing
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              we have sent mail 2 out of 10 .
+            {
+              showLoader?<CircularProgress />:<DialogContentText>
+             <p>{item?.toString()}</p>
             </DialogContentText>
+            }
           </DialogContent>
           <DialogActions>
             <Button autoFocus onClick={handleClose}>
