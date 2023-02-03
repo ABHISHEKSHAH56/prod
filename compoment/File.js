@@ -12,9 +12,9 @@ export default function FileUploadz({Result}) {
   const [open, setopen] = useState(false)
   const [showLoader, setshowLoader] = useState(false)
   const [response, setresponse] = useState()
-  console.log("Result",typeof Result)
+ 
   async function handleSubmit(event) {
-
+    console.log("Result", Result)
     event.preventDefault();
     setopen(true)
     setshowLoader(true)
@@ -28,7 +28,7 @@ const SendEmail=async()=>{
     try {
 
       const emailBody={
-        subject:"",
+        subject:"testing",
         mailBody:Result,
         reciever:Data
       }
@@ -39,9 +39,9 @@ const SendEmail=async()=>{
 
 
       }).catch((err)=>{
-        setresponse("some thing went wrong ")
-        setshowLoader(false)
-        console.log("error",err)
+        setopen(false)
+        alert(err.response?.data);
+
       })
       
     } catch (error) {

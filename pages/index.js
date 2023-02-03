@@ -8,6 +8,7 @@ import CSVReader from "react-csv-reader";
 
 export default function App() {
   const [emailKeyword, setemailKeyword] = useState([]);
+  const [clientKeyword, setclientKeyword] = useState([]);
   const [Result, setResult] = useState("");
   const [showLoader, setshowLoader] = useState(false);
 
@@ -21,7 +22,7 @@ export default function App() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ keyword: emailKeyword.toString() }),
+        body: JSON.stringify({ Businesskeyword: emailKeyword.toString(),clientKeyword:clientKeyword.toString() }),
       });
 
       const data = await response.json();
@@ -50,6 +51,12 @@ export default function App() {
           <Keyword
             emailKeyword={emailKeyword}
             setemailKeyword={setemailKeyword}
+            label={"Enter the Business key word"}
+          />
+          <Keyword
+            emailKeyword={clientKeyword}
+            setemailKeyword={setclientKeyword}
+            label={"Enter the about the client's "}
           />
 
           <div

@@ -1,4 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
+import { PROMPT } from "../../config";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -15,8 +16,9 @@ export default async function (req, res) {
     return;
   }
 
-  const keyword = req.body.keyword || '';
-  if (keyword.trim().length === 0) {
+  const Businesskeyword = req.body.Businesskeyword || '';
+  const clientKeyword=req.body.clientKeyword || '';
+  if (Businesskeyword.trim().length === 0 && clientKeyword.trim().length) {
     res.status(400).json({
       error: {
         message: "Please enter a valid keyword",
@@ -26,16 +28,19 @@ export default async function (req, res) {
   }
 
   try {
+    
+    const promtReplace=PROMPT.replace("<Business Description>",Businesskeyword)
+    const ReplacementPromt=promtReplace.replace("<Client Description>",clientKeyword)
     const response = await openai.createCompletion({
-      model: "text-curie-001",
-      prompt: `Write an email to using ${keyword} position keyword.`,
-      temperature: 0.4,
-      max_tokens: 250,
+      model:process.env.GPT_MODEL,
+      prompt: "text-davinci-003",
+      temperature: 0.7,
+      max_tokens: 400,
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,
     });
-    console.log(response.data)
+    console.log("question", ReplacementPromt, response.data)
     res.status(200).json({ result: response.data.choices[0].text });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case

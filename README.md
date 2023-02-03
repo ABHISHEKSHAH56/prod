@@ -14,7 +14,7 @@ This is an example pet name generator app used in the OpenAI API [quickstart tut
    $ cd openai-quickstart-node
    ```
 
-4. Install the requirements
+4. Install the requirementsxxx
 
    ```bash
    $ npm install
