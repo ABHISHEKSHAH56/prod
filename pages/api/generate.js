@@ -34,8 +34,8 @@ export default async function (req, res) {
     const response = await openai.createCompletion({
       model:process.env.GPT_MODEL,
       prompt: ReplacementPromt,
-      temperature: 0.4,
-      max_tokens: 250,
+      temperature: 0.7,
+      max_tokens: 400,
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,
