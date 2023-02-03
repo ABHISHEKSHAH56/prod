@@ -10,6 +10,7 @@ export default function App() {
   const [emailKeyword, setemailKeyword] = useState([]);
   const [clientKeyword, setclientKeyword] = useState([]);
   const [Result, setResult] = useState("");
+  const [Subject, setSubject] = useState("")
   const [showLoader, setshowLoader] = useState(false);
 
   async function onSubmit(event) {
@@ -34,7 +35,13 @@ export default function App() {
         );
       }
 
-      setResult(data.result);
+     
+      const Body=data.result.split("\n")
+      const sub=Body[1].split(":")
+      if(sub.length==2) setSubject(sub[1])
+      else setSubject("")
+      setResult("Dear <name>\n" + Body.slice(2).join("\n"))
+      console.log(Result,Subject)
       setshowLoader(false);
       setemailKeyword([]);
     } catch (error) {
@@ -94,7 +101,7 @@ export default function App() {
                   <RichText value={Result} setResult={setResult} />
                 </Grid>
                 <Grid item xs={6}>
-                <FileUpload Result={Result} />
+                <FileUpload Result={Result} Subject={Subject}  />
                   
                 </Grid>
               </Grid>

@@ -35,7 +35,7 @@ export default async function (req, res) {
    try {
     let AfterName=mailBody.replace("<name>",item?.name).replace("[Your Name]",item?.name).replace("[Your name]",item?.name).replace("<Sender's Name>",item?.name).replace("<Sender's name>",item?.name).replace("<Name>",item?.name)
     const CompanyNameBody=AfterName.replace("<company name>",item?.companyname).replace("<sender's business name>",item?.name)
-    console.log("company mail",CompanyNameBody)
+    
     
     
     await transporter.sendMail({

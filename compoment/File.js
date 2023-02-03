@@ -6,12 +6,15 @@ import { Button } from "@mui/material";
 import DraggableDialog from "./Dialoge";
 import axios from "axios";
 
-export default function FileUploadz({Result}) {
+export default function FileUploadz({Result,Subject}) {
   const [file, setfile] = useState("");
   const [Data, setData] = useState([]);
   const [open, setopen] = useState(false)
   const [showLoader, setshowLoader] = useState(false)
   const [response, setresponse] = useState()
+  const [subject, setsubject] = useState(Subject)
+
+  
  
   async function handleSubmit(event) {
     console.log("Result", Result)
@@ -28,7 +31,7 @@ const SendEmail=async()=>{
     try {
 
       const emailBody={
-        subject:"testing",
+        subject:subject,
         mailBody:Result,
         reciever:Data
       }
@@ -81,6 +84,23 @@ const SendEmail=async()=>{
       />
       </div>
       <DraggableDialog  setOpen={setopen} open={open} response={response} showLoader={showLoader}/>
+      <div style={{marginTop:"50px"}}>
+      <label
+        className={`${style.formboldformlabel} ${style.formboldformlabel2}`}
+      >
+        Subject
+      </label>
+
+      <input
+        type="text"
+        value={subject}
+        onChange={(e)=>setsubject(e.target.value)}
+        className={style.formboldforminput}
+        
+
+      
+      />
+      </div>
 
       <div style={{
         display:"flex",

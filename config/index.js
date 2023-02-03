@@ -8,6 +8,7 @@ if interested. The description of the sender's business/services is given by fol
 The client name and their company name are: <name> from <company name> Client's business is related to <Client Description>
 Identify and sell on three best selling points based on possible issues faced by clients in terms of a <Business Description>. 
 The sender is a firm and not an individual. Include a Subject line.
+Dear <name>
 `
 
 //const test=await nodemailer.createTestAccount()
