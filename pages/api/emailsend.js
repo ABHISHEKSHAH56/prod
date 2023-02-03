@@ -33,13 +33,16 @@ export default async function (req, res) {
 
   async function HandleRequest(item,response,mailBody,subject){
    try {
-    const AfterName=mailBody.replace("[Your Name]",item?.name)
-    const CompanyNameBody=AfterName.replace("[Your Company Name]",item?.companyname)
+    let AfterName=mailBody.replace("<name>",item?.name).replace("[Your Name]",item?.name)
+    const CompanyNameBody=AfterName.replace("<company name>",item?.companyname).replace("<sender's business name>",item?.name)
+    console.log("company mail",CompanyNameBody)
+    
+    
     await transporter.sendMail({
       from: process.env.FROM_EMAIL, // sender address
       to: item?.email, // list of receivers
       subject:subject, // Subject line
-      html: CompanyNameBody, // plain text body
+      text: CompanyNameBody, // plain text body
        // html body
     }).then((res)=>{
       console.log(res)
@@ -51,6 +54,7 @@ export default async function (req, res) {
       response.push([
         item?.email,"Some thing went wrong"
       ])
+      throw new Error(err.message)
     })
     
    } catch (error) {

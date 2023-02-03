@@ -1,34 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import dynamic from "next/dynamic";
-const RichTextEditor = dynamic(() => import("react-rte"), { ssr: false });
+import style from './style.module.css'
 
 export default function RichText(props) {
-    const [TextValue, setTextValue] = useState()
-    useEffect(() => {
-      const asyncFn = async () => {
-        const module = await import("react-rte")      
-        setTextValue(module.createValueFromString(props?.value,'markdown'))
-      }
-      asyncFn();
-    
-      
-    
-      
-    }, [])
-    
-    const handleChange=(value)=>{
-        console.log("handlechange",value)
-        setTextValue(value)
-        props.setResult(TextValue.toString('html').toString())
-        console.log("xxxxxxxx",TextValue.toString("markdown") )
-    }
-    if (!TextValue) {
-      return null;
-    }
+   
   return (
-    <RichTextEditor
-        value={TextValue}
-        onChange={handleChange}
-      />
+    <div className={`${style.textareaDiv}`}>
+      <textarea
+      name="message"
+      value={props.value}
+      onChange={(e) =>props.setResult(e.target.value) }
+      className={style.textarea}
+      
+      // placeholder="How can we help you?"
+    ></textarea>
+    </div>
   )
 }

@@ -3,14 +3,14 @@ import Chips from './Chip'
 import style from  './style.module.css'
 
 
-export default function Keyword({emailKeyword ,setemailKeyword}) {
+export default function Keyword({emailKeyword ,setemailKeyword,label}) {
   
   const [key, setkey] = useState("")
   return (
     <>
     <div className={style.formboldmb5}>
     <label className={`${style.formboldformlabel} ${style.formboldformlabel2}`}>
-    Enter the key word to generate the email :
+    {label}  :
     </label>
        
         <div style={{
