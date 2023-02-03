@@ -2,12 +2,14 @@
 const nodemailer = require('nodemailer');
 
 export const PROMPT=`
-Write a professional concise e-mail where targeted to a potential client who's quite influential and 
-important person in that company. Tell how sender can help the client, ask for a meet schedule 
-if interested. The description of sender's business/services is given by following keyword/description: <Business Description>
-The client name and their company name is: <name> from <company name> Client's business is a start up related to <Client Description> 
-and sell on three best selling points based on possible issues faced by client in terms of "Business Development". 
-Sender is a firm and not an individual. Include a Subject line.
+Write a professional concise e-mail where targeted to a potential client who's quite an influential and 
+important person in that company. Tell how the sender can help the client, and ask for a meeting schedule 
+if interested. The description of the sender's business/services is given by following keyword/description: <Business Description>
+The client name and their company name are: <name> from <company name> Client's business is related to <Client Description>
+Identify and sell on three best selling points based on possible issues faced by clients in terms of a <Business Description>. 
+The sender is a firm and not an individual. Include a Subject line.
+
+Dear <name>
 `
 
 //const test=await nodemailer.createTestAccount()
