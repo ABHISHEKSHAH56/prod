@@ -5,7 +5,8 @@ import Stack from '@mui/material/Stack';
 export default function Chips({label,emailKeyword,setemailKeyword}) {
 
   const handleDelete = () => {
-  
+    const item=emailKeyword.filter((item)=>item!==label)
+    setemailKeyword(item)
   };
  
 
