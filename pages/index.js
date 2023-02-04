@@ -42,8 +42,7 @@ export default function App() {
       else setSubject("")
       setResult("Dear <name>\n" + Body.slice(2).join("\n"))
       console.log(Result,Subject)
-      setshowLoader(false);
-      setemailKeyword([]);
+      setshowLoader(false);      
     } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -63,7 +62,7 @@ export default function App() {
           <Keyword
             emailKeyword={clientKeyword}
             setemailKeyword={setclientKeyword}
-            label={"Enter the about the client's "}
+            label={"Enter the client's keyword  "}
           />
 
           <div

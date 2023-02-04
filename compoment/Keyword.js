@@ -19,7 +19,7 @@ export default function Keyword({emailKeyword ,setemailKeyword,label}) {
 
         }}>
           {
-            emailKeyword.length>0 && emailKeyword.map((item)=><Chips label={item} handleDelete={()=>{}} />)
+            emailKeyword.length>0 && emailKeyword.map((item)=><Chips label={item}  emailKeyword={emailKeyword} setemailKeyword={setemailKeyword} />)
           }
         </div>
         <div style={{

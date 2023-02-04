@@ -33,7 +33,7 @@ export default async function (req, res) {
     const ReplacementPromt=promtReplace.replace("<Client Description>",clientKeyword)
     const response = await openai.createCompletion({
       model:"text-davinci-003",
-      prompt: PROMPT,
+      prompt: ReplacementPromt,
       temperature: 0.7,
       max_tokens: 400,
       top_p: 1,
