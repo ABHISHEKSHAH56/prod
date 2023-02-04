@@ -13,6 +13,7 @@ export default async function (req, res) {
     // if(sub.length!==2) throw new Error("Subject is missing or format not match ")
     // let subleft=sub[0].split("{")
     // let restbody=sub[1]
+    
   
     for(let i=0; i<reciever.length; i++){
       
@@ -35,13 +36,13 @@ export default async function (req, res) {
    try {
     let AfterName=mailBody.replace("<name>",item?.name).replace("[Your Name]",item?.name).replace("[Your name]",item?.name).replace("<Sender's Name>",item?.name).replace("<Sender's name>",item?.name).replace("<Name>",item?.name)
     const CompanyNameBody=AfterName.replace("<company name>",item?.companyname).replace("<sender's business name>",item?.name)
-    
+    const sub=subject.replace("<company name>",item?.companyname).replace("<sender's business name>",item?.name).replace("<name>",item?.name).replace("[Your Name]",item?.name).replace("[Your name]",item?.name).replace("<Sender's Name>",item?.name).replace("<Sender's name>",item?.name).replace("<Name>",item?.name)
     
     
     await transporter.sendMail({
       from: process.env.FROM_EMAIL, // sender address
       to: item?.email, // list of receivers
-      subject:subject, // Subject line
+      subject:sub, // Subject line
       text: CompanyNameBody, // plain text body
        // html body
     }).then((res)=>{
